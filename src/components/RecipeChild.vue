@@ -2,7 +2,7 @@
 
             
 
-<div class="w-full bg-white border mt-4 rounded-lg shadow-lg overflow-hidden">
+<div class="w-full bg-white border mt-4 rounded-lg shadow-xl overflow-hidden">
     <a href="#">
       <img :src="recipelist.image" alt="Recipe Image" class="w-full h-48 object-cover rounded-t-lg">
     </a>
@@ -18,6 +18,16 @@
         </div>
         <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded ml-3">{{ recipelist.rating }}</span>
       </div>
+    <div class="flex justify-between items-center mt-4">
+        <button @click="toggleLike" class="focus:outline-none">
+          <svg v-if="isLiked" class="w-6 h-6 text-red-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <svg v-else class="w-6 h-6 text-gray-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zM12 19.35l-.45-.43C6.4 14.36 4 11.28 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.78-2.4 5.86-7.55 10.43l-.45.42z"/>
+          </svg>
+        </button>
+      </div>
       <div class="flex justify-between items-center">
         <button  @click="showModal" class="button19 border p-4 w-full">
           View Recipe
@@ -32,32 +42,47 @@
   <teleport to="body">
     <fwb-modal v-if="isShowModal" @close="closeModal">
       <template #header>
-        <div class="flex items-center text-lg">
-          Terms of Service
+        <div class="flex items-center text-lg font-bold">
+         Details
         </div>
       </template>
       <template #body>
         <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-          {{recipelist.name}}
+          {{recipelist.name}} 
         </p>
+        <!-- <div v-for="(recipe, index) in recipelist" :key="index" :recipelist="recipe">
+          <button>{{ recipe.ingredients[index]}}</button>
+        </div> -->
         <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
           <!-- meal ingredients -->
-          {{ recipelist.ingredients}}
-          <!-- meal instructions -->
-          {{ recipelist.instructions}}
-          <!-- meal type -->
-          {{ recipelist.mealType}}
-          <!-- //Italian cuisine -->
-          {{ recipelist.cuisine}}
+          <!-- {{ recipelist.ingredients}} -->
         </p>
+
+       
+        <div v-for="(ingredient, index) in recipelist.ingredients" :key="index">
+        <button class="text-sm font-medium text-gray-900 bg-gray-200 rounded-lg px-3 py-1 my-1">{{ ingredient }}</button>
+      </div>
+
+        <br>
+        <div>
+          <!-- {{ recipelist.instructions}} -->
+
+          <div v-for="(instruction, index) in recipelist.instructions" :key="index">
+        <button class="text-sm font-medium text-gray-900 bg-gray-200 rounded-lg px-3 py-1 my-1">✖️ {{ instruction }}</button>
+      </div>
+        </div>
+          <!-- meal instructions -->
+          <!-- meal type -->
+          <!-- {{ recipelist.mealType}} -->
+          <!-- //Italian cuisine -->
+          <!-- {{ recipelist.cuisine}} -->
       </template>
       <template #footer>
         <div class="flex justify-between">
           <fwb-button @click="closeModal" color="alternative">
-            Decline
           </fwb-button>
-          <fwb-button @click="closeModal" color="green">
-            I accept
+          <fwb-button class="border p-3 bg-black hover:bg-red-500 text-white font-bold rounded-lg" @click="closeModal" color="green">
+            Close List
           </fwb-button>
         </div>
       </template>
@@ -81,6 +106,9 @@ import { ref } from 'vue'
     isShowModal.value = true
   }
 
+  function toggleLike() {
+  isLiked.value = !isLiked.value;
+}
 
 </script>
 

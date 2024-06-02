@@ -81,7 +81,7 @@ const store = useRecipeApp()
 const { recipes } = storeToRefs(store)
 const searchQuery = ref('')
 
-const filteredRecipes = computed(() => {
+const filteredRecipes = computed(() => {      
   return recipes.value.filter(recipe =>
     recipe.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
