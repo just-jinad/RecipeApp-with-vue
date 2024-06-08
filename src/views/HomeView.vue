@@ -1,9 +1,25 @@
 <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
+import HomeDetails from '../components/HomeDetails.vue'
+
 </script>
 
 <template>
-  <main>
+  <HomeDetails/>
+  <HomeDetails>
+    <template v-slot:tope>
+      <div>
+        This is coming from the home meaning the parent 
+      </div>
+    </template>
+
+    <template v-slot:jinad>
+      <div>
+        This is coming from the home meaning the parent but was carried out by jinad 
+      </div>
+    </template>
+  </HomeDetails>
+  <!-- <main>
     <TheWelcome />
-  </main>
+  </main> -->
 </template>

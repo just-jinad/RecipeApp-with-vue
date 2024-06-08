@@ -3,8 +3,8 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+          <img src="https://i.pinimg.com/564x/5f/57/da/5f57da87bc9041c42ab120e2857da837.jpg" class="h-8" alt="Flowbite Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Jrecipe</span>
         </a>
         <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
@@ -34,7 +34,7 @@
       </div>
     </nav>
 
-    <form class="flex items-center max-w-lg mx-auto">   
+    <form class="flex items-center max-w-lg mx-auto p-5">   
       <label for="voice-search" class="sr-only">Search</label>
       <div class="relative w-full">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -63,9 +63,12 @@
       </button>
     </form>
 
-    <div class="container mx-auto py-8">
+    <div class="container mx-auto p-5">
+      Count : {{ getCount }}
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
-        <RecipeChild v-for="(recipe, index) in filteredRecipes" :key="index" :recipelist="recipe" />
+        <RecipeChild v-for="(recipe, index) in filteredRecipes" :key="index" :recipelist="recipe"
+        @update-favourites="updateMe"
+        />
       </div>
     </div>
   </div>
@@ -87,9 +90,22 @@ const filteredRecipes = computed(() => {
   )
 })
 
+
 onMounted(() => {
   store.getFoodRecipes()
 });
+let getCount = ref(0)
+const updateMe = (me) => {
+  if(me){
+    getCount.value++
+  }
+  else{
+    getCount.value--
+  }
+  console.log(getCount)
+
+  
+}
 </script>
 
 <style scoped>
