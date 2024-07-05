@@ -21,3 +21,17 @@ defineProps({
 <style scoped>
 
 </style>
+//mounted, state changes, unmounted
+
+life cycle hooks/methods
+
+componentDidMount(){
+
+}
+componentWillUnmount(){
+
+}
+
+useEffect(()=>{
+
+},[a,b,c])

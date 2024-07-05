@@ -5,7 +5,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/jsjs",
       name: "home",
       component: HomeView,
     },
@@ -15,7 +15,7 @@ const router = createRouter({
       component: () => import("../views/AboutView.vue"),
     },
     {
-      path:'/recipe', name: 'foodlist', component:RecipePage
+      path:'/', name: 'foodlist', component:RecipePage
     }
   ],
 });
